@@ -52,7 +52,7 @@ val app = functionalComponent<RProps> {
             }
         }
         button {
-            +"Born"
+            +"Find"
             attrs.onClickFunction = { find(person) }
         }
         br {  }
