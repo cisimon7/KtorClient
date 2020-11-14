@@ -51,6 +51,8 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.0")
                 implementation("io.ktor:ktor-client-core:1.4.2")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
             }
         }
         val commonTest by getting {
@@ -87,6 +89,9 @@ kotlin {
                 implementation("io.ktor:ktor-client-core-js:1.4.2")
                 implementation("io.ktor:ktor-client-json-js:1.4.2")
                 implementation("io.ktor:ktor-client-serialization-js:1.4.2")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.4.1")
+                implementation("io.ktor:ktor-client-mock:1.4.2")
             }
         }
         val jsTest by getting {

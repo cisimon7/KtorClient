@@ -16,6 +16,7 @@ val client_ = HttpClient {
 }
 
 suspend fun findPerson(name: String): Person {
+    println("querying...")
     return client_.post("$endpoint/call") {
         contentType(ContentType.Application.Json)
         body=name

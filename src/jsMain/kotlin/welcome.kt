@@ -17,53 +17,29 @@ import styled.css
 import styled.styledDiv
 import styled.styledInput
 
-external interface WelcomeProps : RProps {
-    var name: String
-}
-
 val scope_ = MainScope()
 
 val handler = CoroutineExceptionHandler { _, exception ->
     println("CoroutineException: $exception")
 }
 
-val app = functionalComponent<WelcomeProps> { props ->
-    val (name, setName) = useState(props.name)
+val app = functionalComponent<RProps> {
     val (age, setAge) = useState("1")
-    val (person, setPerson) = useState("...")
+    val (person, setPerson) = useState("")
 
     useEffect(dependencies = listOf()) {
         scope_.launch {
             setAge(getAge())
-            /*setPerson(findPerson("Boruto").name)*/
         }
     }
 
     fun find(name: String) {
         scope_.launch(handler) {
-            findPerson(name).let {
-                setPerson(it.name)
-                println("received: ${it.name}")
-            }
+            println("received: ${findPerson(name).name}")
         }
     }
 
     div {
-        styledDiv {
-            css { +WelcomeStyles.textContainer }
-            +"Hello, $name, $age"
-        }
-        styledInput {
-            css { +WelcomeStyles.textInput }
-            attrs {
-                type = InputType.text
-                value = name
-                onChangeFunction = { event ->
-                    setName((event.target as HTMLInputElement).value)
-                }
-            }
-        }
-        br {  }
         styledInput {
             css { +WelcomeStyles.textInput }
             attrs {
