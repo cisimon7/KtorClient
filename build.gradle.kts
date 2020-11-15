@@ -1,5 +1,9 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
+val kotlinVersion = "1.4.0"
+val serializationVersion = "1.0.0-RC"
+val ktorVersion = "1.4.0"
+
 plugins {
     kotlin("multiplatform") version "1.4.10"
     application
@@ -49,6 +53,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.0")
                 implementation("io.ktor:ktor-client-core:1.4.2")
 

@@ -35,7 +35,7 @@ val app = functionalComponent<RProps> {
 
     fun find(name: String) {
         scope_.launch(handler) {
-            println("received: ${findPerson(name).name}")
+            setPerson(findPerson(name).name)
         }
     }
 

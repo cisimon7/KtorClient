@@ -17,14 +17,19 @@ val client_ = HttpClient {
 
 suspend fun findPerson(name: String): Person {
     println("querying...")
-    return client_.post("$endpoint/call") {
-        contentType(ContentType.Application.Json)
-        body=name
+    val person: Person
+    try {
+        person = client_.post("$endpoint/call") {
+            /*contentType(ContentType.Application.Json)*/
+            body=name
+        }
+    } catch (error: Exception) {
+        println(error)
+        throw error
     }
+    return person
 }
 
 suspend fun getAge(): String {
-    return client_.use { client ->
-        client.get("${endpoint}/age")
-    }
+    return client_.get("${endpoint}/age")
 }
