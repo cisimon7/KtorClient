@@ -2,13 +2,12 @@ import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
-import io.ktor.http.*
 import io.ktor.utils.io.core.*
 import kotlinx.browser.window
 
 val endpoint = window.location.origin
 
-val client_ = HttpClient {
+val httpClient = HttpClient {
     install(JsonFeature) {
         serializer = KotlinxSerializer()
     }
@@ -17,19 +16,18 @@ val client_ = HttpClient {
 
 suspend fun findPerson(name: String): Person {
     println("querying...")
-    val person: Person
-    try {
-        person = client_.post("$endpoint/call") {
-            /*contentType(ContentType.Application.Json)*/
+    val response = runCatching {
+        httpClient.post<Person>("$endpoint/call") {
             body=name
         }
-    } catch (error: Exception) {
-        println(error)
-        throw error
     }
-    return person
+
+    return response.fold(
+        { result -> println(result); result },
+        { error -> println(error); throw error }
+    )
 }
 
 suspend fun getAge(): String {
-    return client_.get("${endpoint}/age")
+    return httpClient.get("${endpoint}/age")
 }

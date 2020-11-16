@@ -6,10 +6,7 @@ import kotlinx.html.js.onChangeFunction
 import kotlinx.html.js.onClickFunction
 import org.w3c.dom.HTMLInputElement
 import react.RProps
-import react.dom.br
-import react.dom.button
-import react.dom.div
-import react.dom.h3
+import react.dom.*
 import react.functionalComponent
 import react.useEffect
 import react.useState
